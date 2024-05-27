@@ -2,6 +2,17 @@ import pandas as pd
 import streamlit as st
 from PIL import Image
 
+st.markdown(
+    """
+    <style>
+    .streamlit-slider > div {
+        background: linear-gradient(to right, green, blue) !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 st.markdown('<h2 style="color: green;text-align: center;">Análisis de temperatura y humedad de mi compostador</h2>', unsafe_allow_html=True)
 image = Image.open('images2.jpg')
 st.image(image)
@@ -29,8 +40,6 @@ if uploaded_file is not None:
     st.write('<h3 style="color: green;">Temperatura y humedad superiores al valor configurado</h3>', unsafe_allow_html=True)
     st.write('Dataframe Filtrado')
     st.write(filtrado_df_min)
-
-    st.markdown('<style>div[data-baseweb="slider"] {color: green; }</style>', unsafe_allow_html=True)
     
     max_temp = st.slider('Selecciona el valor máximo del filtro ', min_value=-10, max_value=45, value=23, key=2)
     # Filtrar el DataFrame utilizando query
