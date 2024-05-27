@@ -57,12 +57,12 @@ if uploaded_file is not None:
 
     # Verifica si las columnas existen antes de intentar usarlas
     if "temperatura ESP32" in df1.columns:
-        st.dataframe(df1["temperatura {device="ESP32", name="IAmara"}"].describe())
+        st.dataframe(df1["temperatura"].describe())
     else:
         st.warning('La columna "temperatura ESP32" no se encontró en el archivo CSV.')
 
     if "Humedad" in df1.columns:
-        st.dataframe(df1["Humedad {device="ESP32", name="IAmara"}"].describe())
+        st.dataframe(df1["Humedad"].describe())
     else:
         st.warning('La columna "Humedad" no se encontró en el archivo CSV.')
 
