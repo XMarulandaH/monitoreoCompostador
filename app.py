@@ -22,21 +22,21 @@ if uploaded_file is not None:
     st.subheader('Estadísticos básicos de los sensores')
     st.dataframe(df1[['temperatura', 'humedad']].describe())
 
-    min_temp = st.slider('Selecciona valor mínimo del filtro ', min_value=-10, max_value=45, value=23, key=1)
+    min_temp = st.slider('Selecciona el valor mínimo del filtro ', min_value=-10, max_value=45, value=23, key=1)
     # Filtrar el DataFrame utilizando query
     filtrado_df_min = df1.query(f"`temperatura` > {min_temp}")
     # Mostrar el DataFrame filtrado
-    st.subheader("Temperaturay humedad superiores al valor configurado.")
+    st.subheader("Temperatura y humedad superiores al valor configurado")
     st.write('Dataframe Filtrado')
     st.write(filtrado_df_min)
 
-    max_temp = st.slider('Selecciona valor máximo del filtro ', min_value=-10, max_value=45, value=23, key=2)
+    max_temp = st.slider('Selecciona el valor máximo del filtro ', min_value=-10, max_value=45, value=23, key=2)
     # Filtrar el DataFrame utilizando query
     filtrado_df_max = df1.query(f"`temperatura` < {max_temp}")
     # Mostrar el DataFrame filtrado
-    st.subheader("Temperatura y humedad inferiores al valor configurado.")
+    st.subheader("Temperatura y humedad inferiores al valor configurado")
     st.write('Dataframe Filtrado')
     st.write(filtrado_df_max)
 
 else:
-    st.warning('Necesitas cargar tu archivo csv excel de Grafana.')
+    st.warning('Necesitas cargar tu archivo csv excel de Grafana')
