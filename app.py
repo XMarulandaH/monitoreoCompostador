@@ -1,7 +1,6 @@
 import pandas as pd
 import streamlit as st
 from PIL import Image
-from st_aggrid import AgGrid, GridOptionsBuilder, JsCode
 
 st.markdown('<h2 style="color: green;text-align: center;">Análisis de temperatura y humedad de mi compostador</h2>', unsafe_allow_html=True)
 image = Image.open('images2.jpg')
@@ -20,35 +19,9 @@ if uploaded_file is not None:
     st.line_chart(df1)
 
     st.write(df1)
-    st.subheader('Estadísticos básicos de los sensores')
-
-    # Configurar opciones de la tabla con st_aggrid
-    gb = GridOptionsBuilder.from_dataframe(df1[['temperatura', 'humedad']].describe())
-    gb.configure_default_column(groupable=True, value=True, enableRowGroup=True, aggFunc='sum', editable=True)
-
-    # Personalizar el estilo de las celdas
-    cellstyle_jscode = JsCode("""
-    function(params) {
-        return {
-            'color': 'black', 
-            'backgroundColor': (params.node.rowIndex % 2 === 0) ? '#F2F2F2' : '#E6FFE6',
-            'font-weight': 'bold' if params.node.rowPinned else 'normal'
-        };
-    }
-    """)
-    gb.configure_column("index", cellStyle=cellstyle_jscode)
-    gb.configure_column("temperatura", cellStyle=cellstyle_jscode)
-    gb.configure_column("humedad", cellStyle=cellstyle_jscode)
-
-    gridOptions = gb.build()
-
-    AgGrid(
-        df1[['temperatura', 'humedad']].describe(),
-        gridOptions=gridOptions,
-        enable_enterprise_modules=True,
-        height=300,
-        fit_columns_on_grid_load=True
-    )
+    st.subheader('Estadísticos básicos de los sensores.')
+    st.dataframe(df1["temperatura"].describe())
+    st.dataframe(df1["humedad"].describe())
 
     min_temp = st.slider('Selecciona valor mínimo del filtro ', min_value=-10, max_value=45, value=23, key=1)
     # Filtrar el DataFrame utilizando query
