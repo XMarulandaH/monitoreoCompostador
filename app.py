@@ -33,7 +33,7 @@ st.markdown(
 )
 
 # Ajustar el tamaño de la imagen
-image = Image.open('images.jpg')
+image = Image.open('images2.jpg')
 st.markdown('<div class="image-container">', unsafe_allow_html=True)
 st.image(image, width=500)
 st.markdown('</div>', unsafe_allow_html=True)
