@@ -30,7 +30,7 @@ if uploaded_file is not None:
     st.write('Dataframe Filtrado')
     st.write(filtrado_df_min)
 
-    st.markdown('<style>div[data-baseweb="slider"] { background-color: green; }</style>', unsafe_allow_html=True)
+    st.markdown('<style>div[data-baseweb="slider"] {color: green; }</style>', unsafe_allow_html=True)
     
     max_temp = st.slider('Selecciona el valor máximo del filtro ', min_value=-10, max_value=45, value=23, key=2)
     # Filtrar el DataFrame utilizando query
