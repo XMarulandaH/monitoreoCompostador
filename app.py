@@ -14,7 +14,7 @@ if uploaded_file is not None:
     # Renombrar las columnas para que sean más manejables
     df1.columns = ['Time', 'temperatura', 'humedad']
 
-    st.write('<h4 style="color: green;">Perfil gráfico de las variables medidas</h4>', unsafe_allow_html=True)
+    st.write('<h3 style="color: green;">Perfil gráfico de las variables medidas</h3>', unsafe_allow_html=True)
     df1 = df1.set_index('Time')
     st.line_chart(df1)
 
