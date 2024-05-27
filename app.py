@@ -2,17 +2,6 @@ import pandas as pd
 import streamlit as st
 from PIL import Image
 
-st.markdown(
-    """
-    <style>
-    .streamlit-slider > div {
-        background: linear-gradient(to right, green, blue) !important;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 st.markdown('<h2 style="color: green;text-align: center;">Análisis de temperatura y humedad de mi compostador</h2>', unsafe_allow_html=True)
 image = Image.open('images2.jpg')
 st.image(image)
