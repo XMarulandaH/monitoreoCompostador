@@ -20,8 +20,9 @@ if uploaded_file is not None:
 
     st.write(df1)
     st.subheader('Estadísticos básicos de los sensores')
-    st.dataframe(df1["temperatura"].describe())
-    st.dataframe(df1["humedad"].describe())
+    #st.dataframe(df1["temperatura"].describe())
+    #st.dataframe(df1["humedad"].describe())
+    st.dataframe(df1[['temperatura', 'humedad']].describe())
 
     min_temp = st.slider('Selecciona valor mínimo del filtro ', min_value=-40, max_value=100, value=23, key=1)
     # Filtrar el DataFrame utilizando query
