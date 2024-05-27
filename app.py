@@ -7,7 +7,7 @@ st.markdown('<h2 style="color: green;text-align: center;">Análisis de temperatu
 image = Image.open('images2.jpg')
 st.image(image)
 
-uploaded_file = st.file_uploader('Choose a file')
+uploaded_file = st.file_uploader('Carga tu archivo CSV')
 
 if uploaded_file is not None:
    df1=pd.read_csv(uploaded_file)
@@ -38,4 +38,4 @@ if uploaded_file is not None:
    
 
 else:
- st.warning('Necesitas cargar un archivo csv excel.')
+ st.warning('Necesitas cargar tu archivo csv excel de Grafana.')
