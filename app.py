@@ -1,39 +1,11 @@
 import pandas as pd
 import streamlit as st
 from PIL import Image
-
-# CSS personalizado para cambiar el color de las tablas
-table_css = """
-<style>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-        color: white;
-        background-color: #4CAF50;  /* Cambiar el color del encabezado de la tabla */
-    }
-
-    .dataframe tbody tr {
-        background-color: #f2f2f2;  /* Cambiar el color de las filas de la tabla */
-    }
-
-    .dataframe tbody tr:nth-child(even) {
-        background-color: #e6ffe6;  /* Cambiar el color de las filas pares */
-    }
-</style>
-"""
+from st_aggrid import AgGrid, GridOptionsBuilder, JsCode
 
 st.markdown('<h2 style="color: green;text-align: center;">Análisis de temperatura y humedad de mi compostador</h2>', unsafe_allow_html=True)
 image = Image.open('images2.jpg')
 st.image(image)
-
-st.markdown(table_css, unsafe_allow_html=True)  # Inyectar CSS personalizado
 
 uploaded_file = st.file_uploader('Carga tu archivo CSV')
 
@@ -49,7 +21,34 @@ if uploaded_file is not None:
 
     st.write(df1)
     st.subheader('Estadísticos básicos de los sensores')
-    st.dataframe(df1[['temperatura', 'humedad']].describe())
+
+    # Configurar opciones de la tabla con st_aggrid
+    gb = GridOptionsBuilder.from_dataframe(df1[['temperatura', 'humedad']].describe())
+    gb.configure_default_column(groupable=True, value=True, enableRowGroup=True, aggFunc='sum', editable=True)
+
+    # Personalizar el estilo de las celdas
+    cellstyle_jscode = JsCode("""
+    function(params) {
+        return {
+            'color': 'black', 
+            'backgroundColor': (params.node.rowIndex % 2 === 0) ? '#F2F2F2' : '#E6FFE6',
+            'font-weight': 'bold' if params.node.rowPinned else 'normal'
+        };
+    }
+    """)
+    gb.configure_column("index", cellStyle=cellstyle_jscode)
+    gb.configure_column("temperatura", cellStyle=cellstyle_jscode)
+    gb.configure_column("humedad", cellStyle=cellstyle_jscode)
+
+    gridOptions = gb.build()
+
+    AgGrid(
+        df1[['temperatura', 'humedad']].describe(),
+        gridOptions=gridOptions,
+        enable_enterprise_modules=True,
+        height=300,
+        fit_columns_on_grid_load=True
+    )
 
     min_temp = st.slider('Selecciona valor mínimo del filtro ', min_value=-10, max_value=45, value=23, key=1)
     # Filtrar el DataFrame utilizando query
