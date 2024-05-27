@@ -6,6 +6,17 @@ st.markdown('<h2 style="color: green;text-align: center;">Análisis de temperatu
 image = Image.open('images2.jpg')
 st.image(image)
 
+st.markdown(
+    """
+    <style>
+    .css-1l02zno {
+        background-color: green !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 uploaded_file = st.file_uploader('Carga tu archivo CSV')
 
 if uploaded_file is not None:
