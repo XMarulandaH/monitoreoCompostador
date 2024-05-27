@@ -2,7 +2,6 @@ import pandas as pd
 import streamlit as st
 from PIL import Image
 
-
 # CSS personalizado para cambiar el color de las tablas
 table_css = """
 <style>
@@ -17,11 +16,11 @@ table_css = """
     .dataframe thead th {
         text-align: right;
         color: white;
-        background-color: #00BF63;  /* Cambiar el color del encabezado de la tabla */
+        background-color: #4CAF50;  /* Cambiar el color del encabezado de la tabla */
     }
 
     .dataframe tbody tr {
-        background-color: #B9DBBA;  /* Cambiar el color de las filas de la tabla */
+        background-color: #f2f2f2;  /* Cambiar el color de las filas de la tabla */
     }
 
     .dataframe tbody tr:nth-child(even) {
@@ -34,7 +33,7 @@ st.markdown('<h2 style="color: green;text-align: center;">Análisis de temperatu
 image = Image.open('images2.jpg')
 st.image(image)
 
-st.markdown(table_css, unsafe_allow_html=True)
+st.markdown(table_css, unsafe_allow_html=True)  # Inyectar CSS personalizado
 
 uploaded_file = st.file_uploader('Carga tu archivo CSV')
 
@@ -52,19 +51,19 @@ if uploaded_file is not None:
     st.subheader('Estadísticos básicos de los sensores')
     st.dataframe(df1[['temperatura', 'humedad']].describe())
 
-    min_temp = st.slider('Selecciona valor mínimo del filtro ', min_value=-40, max_value=100, value=23, key=1)
+    min_temp = st.slider('Selecciona valor mínimo del filtro ', min_value=-10, max_value=45, value=23, key=1)
     # Filtrar el DataFrame utilizando query
     filtrado_df_min = df1.query(f"`temperatura` > {min_temp}")
     # Mostrar el DataFrame filtrado
-    st.subheader("Temperatura y humedad superiores al valor configurado.")
+    st.subheader("Temperaturas superiores al valor configurado.")
     st.write('Dataframe Filtrado')
     st.write(filtrado_df_min)
 
-    max_temp = st.slider('Selecciona valor máximo del filtro ', min_value=-40, max_value=100, value=23, key=2)
+    max_temp = st.slider('Selecciona valor máximo del filtro ', min_value=-10, max_value=45, value=23, key=2)
     # Filtrar el DataFrame utilizando query
     filtrado_df_max = df1.query(f"`temperatura` < {max_temp}")
     # Mostrar el DataFrame filtrado
-    st.subheader("Temperatura y humedad inferiores al valor configurado.")
+    st.subheader("Temperaturas Inferiores al valor configurado.")
     st.write('Dataframe Filtrado')
     st.write(filtrado_df_max)
 
