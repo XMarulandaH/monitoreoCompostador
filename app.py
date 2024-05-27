@@ -3,7 +3,7 @@ import streamlit as st
 from PIL import Image
 
 
-st.title('Análisis de datos de Sensores en Mi Ciudad')
+st.markdown('<h2 style="color: green;text-align: center;">Análisis de temperatura y humedad de mi sensor</h2>', unsafe_allow_html=True)
 image = Image.open('images2.jpg')
 st.image(image)
 
